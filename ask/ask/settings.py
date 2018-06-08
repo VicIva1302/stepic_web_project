@@ -25,7 +25,7 @@ SECRET_KEY = '7m3j!r3wqjyp_i7rut_##gnf9_bi!s_++4!mldb#*te1^c0jgg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
