@@ -7,5 +7,5 @@ from django.http import HttpResponse, Http404
 def test(request, *args, **kwargs):
     return HttpResponse('OK')
 
-def not_found (request, *args, **kwargs)
+def not_found (request, *args, **kwargs):
     raise Http404
