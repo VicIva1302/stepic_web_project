@@ -8,4 +8,5 @@ def test(request, *args, **kwargs):
     return HttpResponse('OK')
 
 def not_found (request, *args, **kwargs):
-    raise Http404
+#    raise Http404
+    return('Not OK')
