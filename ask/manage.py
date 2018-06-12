@@ -3,6 +3,7 @@ import os
 import sys
 
 if __name__ == "__main__":
+    sys.path.append('C:\\Users\\gerda\\PycharmProjects\\stepic_web_project\\ask\\ask')
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ask.settings")
     try:
         from django.core.management import execute_from_command_line

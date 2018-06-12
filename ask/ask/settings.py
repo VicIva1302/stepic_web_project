@@ -69,7 +69,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ask.wsgi.application'
-TEMPLATE_DIRS = BASE_DIR + '/templates'
+TEMPLATE_DIRS = (BASE_DIR + '/templates', )
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
