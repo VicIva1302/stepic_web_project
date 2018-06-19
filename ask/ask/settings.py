@@ -37,25 +37,26 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'qa',
+    #'qa',
+    'qa.apps.QaConfig',
 ]
 
-#MIDDLEWARE = [
-#    'django.middleware.security.SecurityMiddleware',
-##    'django.contrib.sessions.middleware.SessionMiddleware',
-#    'django.middleware.common.CommonMiddleware',
-#    'django.middleware.csrf.CsrfViewMiddleware',
-#    'django.contrib.auth.middleware.AuthenticationMiddleware',
-#    'django.contrib.messages.middleware.MessageMiddleware',
-#    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-#]
+MIDDLEWARE = [
+   'django.middleware.security.SecurityMiddleware',
+   'django.contrib.sessions.middleware.SessionMiddleware',
+   'django.middleware.common.CommonMiddleware',
+   'django.middleware.csrf.CsrfViewMiddleware',
+   'django.contrib.auth.middleware.AuthenticationMiddleware',
+   'django.contrib.messages.middleware.MessageMiddleware',
+   'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
 
 ROOT_URLCONF = 'ask.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,7 +70,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ask.wsgi.application'
-TEMPLATE_DIRS = (BASE_DIR + '/templates', )
+TEMPLATE_DIRS = (BASE_DIR + '/templates',
+                 os.path.join(os.path.dirname(__file__), 'templates'),)
+
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -81,6 +84,15 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'DB_NAME',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': '3306',
+        # 'USER': 'root',
+        # 'PASSWORD': '',
+    # }}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
