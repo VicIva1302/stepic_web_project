@@ -12,7 +12,6 @@ class QuestionManager(models.Manager):
     def popular():
         return self.order_by('-rating')
 
-@python_2_unicode_compatible
 class Question(models.Model):
     objects = QuestionManager()
     title = models.CharField(default="", max_length=255)
@@ -26,7 +25,6 @@ class Question(models.Model):
     def get_url(self):
         return "/question/{}/".format(self.id)
 
-@python_2_unicode_compatible
 class Answer(models.Model):
     text = models.TextField(default="")
     added_at = models.DateTimeField(auto_now_add=True)
