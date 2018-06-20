@@ -87,7 +87,7 @@ TEMPLATE_DIRS = (BASE_DIR + '/templates',
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mysql',
+        'NAME': 'mybase',
         # 'HOST': '127.0.0.1',
         # 'PORT': '3306',
         'USER': 'admin',

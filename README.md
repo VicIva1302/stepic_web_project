@@ -22,3 +22,20 @@ http://127.0.0.1/hello/
 http://127.0.0.1:8080/
 
 5. Не забудьте закомитить и сохранить на github полученную структуру директорий и конфиги.
+=====================================================================================
+задание 2.3 Работа с СУБД
+git clone https://github.com/...
+--последние изменения в ветке home, переходим туда и фетчим
+sudo pip install pymysql # Нужно для работы MySQL
+sudo pip install --upgrade django #  ﻿﻿Апргейдим Джангу до последней версии.
+sudo /etc/init.d/mysql start
+--Создаем пользователя и базу, выдаем права
+mysql -uroot -e "CREATE USER 'admin'@'localhost'"
+mysql -uroot -e "SET PASSWORD FOR 'admin'@'localhost' = PASSWORD('pass111')"
+mysql -uroot -e "CREATE DATABASE mybase"
+mysql -uroot -e "GRANT ALL ON mybase.* TO 'admin'@'localhost'"
+-- Создаем таблицы для моделей
+python manage.py makemigrations qa
+python manage.py migrate
+--запускаем приложение для проверки:
+./init.sh
