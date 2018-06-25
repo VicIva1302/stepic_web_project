@@ -5,12 +5,15 @@ import datetime
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 class QuestionManager(models.Manager):
     def new():
-        return self.order_by('-added_at')
+        #pass
+        return self.order_by('-id')
     def popular():
-        return self.order_by('-rating')
+        #return self.order_by('-rating')
+        pass
 
 class Question(models.Model):
     objects = QuestionManager()
@@ -24,6 +27,8 @@ class Question(models.Model):
         return self.title
     def get_url(self):
         return "/question/{}/".format(self.id)
+    def get_absolute_url(self):
+        return reverse('question', kwargs={'pk': self.id})
 
 class Answer(models.Model):
     text = models.TextField(default="")

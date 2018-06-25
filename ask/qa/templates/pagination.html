@@ -1,0 +1,28 @@
+<!--{% if paginator.num_pages > 1 %}-->
+<!--<nav>-->
+    <!--<ul>-->
+        <!--{% for p in paginator.page_range %}-->
+        <!--{% if p == page.number %}-->
+        <!--<li>-->
+            <!--{% else %}-->
+        <!--<li>-->
+            <!--{% endif %}-->
+            <!--<a href="{{ paginator.baseurl }}{{ p }}">{{ p }}</a>-->
+        <!--</li>-->
+        <!--{% endfor %}-->
+    <!--</ul>-->
+<!--</nav>-->
+<!--{% endif %}-->
+<nav><ul class="pagination">
+    {% for p in paginator.page_range %}
+        {% if p == page.number %}
+            <li class="active">
+        {% else %}
+            <li>
+        {% endif %}
+        <a href="?page={{ p }}">{{ p }}</a>
+            </li>
+    {% endfor %}
+</ul>
+</nav>
+

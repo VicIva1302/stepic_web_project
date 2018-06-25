@@ -1,0 +1,43 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1>{{ question.title }}</h1>
+<p class="submitted">
+    Published {{ question.added_at }} by {{ question.author }}
+</p>
+{{ question.text|linebreaks }}
+
+{% block answers %}
+<h2>Answers:</h2>
+{% for answer in answers %}
+<div>
+    <p>
+        Answer by {{ answer.author }} [{{ answer.added_at }}]
+    </p>
+    {{ answer.text|linebreaks }}
+</div>
+{% empty %}
+<p>There are no answers yet.</p>
+{% endfor %}
+{% endblock %}
+
+{% block question_ask %}
+<h1>Your answer:</h1>
+{% for e in form.non_field_errors %}
+<div>{{ e }}</div>
+{% endfor %}
+<div>
+    <form method="POST" action="/answer/">
+        {% csrf_token %}
+        {% for field in form %}
+        <div {% if field.errors %} alert{% endif %}>
+            {{ field }}
+            {{ field.errors }}
+        </div>
+        {% endfor %}
+        <button type="submit">Add answer</button>
+    </form>
+</div>
+{% endblock %}
+
+{% endblock %}
