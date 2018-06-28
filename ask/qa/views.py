@@ -2,7 +2,10 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage
 # Create your views here.
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
+from .forms import AskForm, AnswerForm
+
 from .models import Question
 
 def paginate(request, qs):
@@ -31,14 +34,15 @@ def not_found (request, *args, **kwargs):
     return('Not OK')
 
 #/question/5/
+@csrf_exempt
 def vquestion(request, pk):
     question = get_object_or_404(Question, id=pk)
     answers = question.answer_set.all()
-    #form = AnswerForm(initial={'question': str(pk)})
+    form = AnswerForm(initial={'question': str(pk)})
     return render(request, 'question.html', {
         'question': question,
         'answers': answers,
-       # 'form': form,
+        'form': form,
     })
 
 # /popular/?page=3
@@ -51,10 +55,6 @@ def vpopular(request):
         'page': page,
         'paginator': paginator,
     })
-
-def vquestion_ask(request, *args, **kwargs):
-    return HttpResponse('OK vquestion_ask')
-
 def vsignup(request, *args, **kwargs):
     return HttpResponse('OK vsignup')
 
@@ -76,6 +76,27 @@ def vmainpg(request, *args, **kwargs):
         'page': page,
         'paginator': paginator,
     })
-
+@csrf_exempt
+def vquestion_ask(request, *args, **kwargs):
+    if request.method == 'POST':
+        form = AskForm(request.POST)
+        if form.is_valid():
+            #form._user = request.user
+            ask = form.save()
+            url = ask.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = AskForm()
+    return render(request, 'ask.html', {
+        'form': form
+    })
+@csrf_exempt
 def vquestion_ans(request, *args, **kwargs):
-    return HttpResponse('OK vquestion_ans')
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+           # form._user = request.user
+            answer = form.save()
+            url = answer.get_url()
+            return HttpResponseRedirect(url)
+    return HttpResponseRedirect('/')

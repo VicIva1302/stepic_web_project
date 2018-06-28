@@ -35,4 +35,5 @@ class Answer(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
     question = models.ForeignKey(Question, null=True, on_delete=models.SET_NULL)
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-
+    def get_url(self):
+        return format(self.question.get_url())
