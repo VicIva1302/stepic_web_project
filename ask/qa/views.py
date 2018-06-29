@@ -81,10 +81,11 @@ def vquestion_ask(request, *args, **kwargs):
     if request.method == 'POST':
         form = AskForm(request.POST)
         if form.is_valid():
-            #form._user = request.user
+            form._user = request.user
             ask = form.save()
             url = ask.get_url()
-            return HttpResponseRedirect(url)
+            #return HttpResponseRedirect(url)
+            return HttpResponseRedirect('OK')
     else:
         form = AskForm()
     return render(request, 'ask.html', {
@@ -95,7 +96,7 @@ def vquestion_ans(request, *args, **kwargs):
     if request.method == 'POST':
         form = AnswerForm(request.POST)
         if form.is_valid():
-           # form._user = request.user
+            form._user = request.user
             answer = form.save()
             url = answer.get_url()
             return HttpResponseRedirect(url)
