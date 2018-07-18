@@ -84,8 +84,8 @@ def vquestion_ask(request, *args, **kwargs):
             form._user = request.user
             ask = form.save()
             url = ask.get_url()
-            #return HttpResponseRedirect(url)
-            return HttpResponseRedirect('OK')
+            return HttpResponseRedirect(url)
+            #return HttpResponseRedirect('OK')
     else:
         form = AskForm()
     return render(request, 'ask.html', {

@@ -28,12 +28,15 @@ http://127.0.0.1:8080/
 sudo pip install pymysql # Нужно для работы MySQL
 sudo pip install --upgrade django #  ﻿﻿Апргейдим Джангу до последней версии.
 sudo /etc/init.d/mysql start
---Создаем пользователя и базу, выдаем права
-mysql -uroot -e "CREATE USER 'admin'@'localhost'"
-mysql -uroot -e "SET PASSWORD FOR 'admin'@'localhost' = PASSWORD('pass111')"
-mysql -uroot -e "CREATE DATABASE mybase"
-mysql -uroot -e "GRANT ALL ON mybase.* TO 'admin'@'localhost'"
+--Создаем пользователя и базу, выдаем права(работает все и без mysql)
+#mysql -uroot -e "CREATE USER 'admin'@'localhost'"
+#mysql -uroot -e "SET PASSWORD FOR 'admin'@'localhost' = PASSWORD('pass111')"
+#mysql -uroot -e "CREATE DATABASE mybase"
+#mysql -uroot -e "GRANT ALL ON mybase.* TO 'admin'@'localhost'"
+-- ВСЕ ЧТО ДО ЭТОГО, ДЛЯ СДАЧИ 2.6 НЕ НУЖНО
 -- Создаем таблицы для моделей
+--ВАЖНО!!! для всей папки выдать права 
+chmod -R a+rw .
 python manage.py makemigrations qa
 python manage.py migrate
 --запускаем приложение для проверки:
