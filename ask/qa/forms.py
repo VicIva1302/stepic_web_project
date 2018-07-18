@@ -16,6 +16,13 @@ class AskForm(forms.Form):
             raise forms.ValidationError(('Text is empty'), code='Validation_Error')
         return text
     def save(self):
+        # ask = Question(**self.cleaned_data)
+        # ask.save()
+        # return ask
+        if self._user.is_anonymous():
+            self.cleaned_data['author_id'] = 1
+        else:
+            self.cleaned_data['author'] = self._user
         ask = Question(**self.cleaned_data)
         ask.save()
         return ask
@@ -36,7 +43,14 @@ class AnswerForm(forms.Form):
         return text
     def save(self):
         #self.cleaned_data['question'] = get_object_or_404(Question, pk=self.cleaned_data['question'])
+        # answer = Answer(**self.cleaned_data)
+        # answer.save()
+        # return answer
+        # #return Answer.objects.create(**self.cleaned_data)
+        if self._user.is_anonymous():
+            self.cleaned_data['author_id'] = 1
+        else:
+            self.cleaned_data['author'] = self._user
         answer = Answer(**self.cleaned_data)
         answer.save()
         return answer
-        #return Answer.objects.create(**self.cleaned_data)
